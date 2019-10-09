@@ -16,7 +16,7 @@ services:
     restart: unless-stopped
     networks:
       mysql-ms-network:
-        ipv4_address: 172.25.0.101;
+        ipv4_address: 172.25.0.101
   mysql-slave:
     image: mysql:5.7
     container_name: mysql_slave
@@ -34,7 +34,23 @@ services:
     networks:
       mysql-ms-network:
         ipv4_address: 172.25.0.102
-
+  mysql-slave2:
+    image: mysql:5.7
+    container_name: mysql_slave2
+    ports:
+      - 3308:3306
+    volumes:
+      - ./volume/mysql-slave2:/var/lib/mysql
+      - ./volume/conf/mysqld-slave2.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+    environment:
+      MYSQL_ROOT_PASSWORD: aq1sw2de
+      MYSQL_DATABASE: BIG
+      MYSQL_USER: bigadmin
+      MYSQL_PASSWORD: aq1sw2de
+    restart: unless-stopped
+    networks:
+      mysql-ms-network:
+        ipv4_address: 172.25.0.103
 networks:
   mysql-ms-network:
     driver: bridge
