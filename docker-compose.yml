@@ -1,0 +1,43 @@
+version: "3"
+services:
+  mysql-master:
+    image: mysql:5.7
+    container_name: mysql_master
+    ports:
+      - 3306:3306
+    volumes:
+      - ./volume/mysql-master:/var/lib/mysql
+      - ./volume/conf/mysqld-master.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+    environment:
+      MYSQL_ROOT_PASSWORD: aq1sw2de
+      MYSQL_DATABASE: BIG
+      MYSQL_USER: bigadmin
+      MYSQL_PASSWORD: aq1sw2de
+    restart: unless-stopped
+    networks:
+      mysql-ms-network:
+        ipv4_address: 172.25.0.101;
+  mysql-slave:
+    image: mysql:5.7
+    container_name: mysql_slave
+    ports:
+      - 3307:3306
+    volumes:
+      - ./volume/mysql-slave:/var/lib/mysql
+      - ./volume/conf/mysqld-slave.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+    environment:
+      MYSQL_ROOT_PASSWORD: aq1sw2de
+      MYSQL_DATABASE: BIG
+      MYSQL_USER: bigadmin
+      MYSQL_PASSWORD: aq1sw2de
+    restart: unless-stopped
+    networks:
+      mysql-ms-network:
+        ipv4_address: 172.25.0.102
+
+networks:
+  mysql-ms-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/24
