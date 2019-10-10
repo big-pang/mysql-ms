@@ -8,7 +8,7 @@ services:
     volumes:
       - ./volume/mysql-master:/var/lib/mysql
       - ./volume/conf/mysqld-master.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
-      - ./shell/ms.sh:/ma.sh
+      - ./shell/ms.sh:/ms.sh
     environment:
       MYSQL_ROOT_PASSWORD: aq1sw2de
       MYSQL_DATABASE: BIG

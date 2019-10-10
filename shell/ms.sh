@@ -23,4 +23,4 @@ EOF
 mysql  -u root -paq1sw2de -h $SLAVE1_HOST < slave.sql
 mysql  -u root -paq1sw2de -h $SLAVE2_HOST  < slave.sql
 
-exie;
+exit;
